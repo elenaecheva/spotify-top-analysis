@@ -6,6 +6,7 @@ Análisis de tus artistas, canciones y álbumes más escuchados usando la Spotif
 
 ![R](https://img.shields.io/badge/R-276DC3?style=flat&logo=r&logoColor=white)
 ![Spotify API](https://img.shields.io/badge/Spotify_Web_API-1DB954?style=flat&logo=spotify&logoColor=white)
+![Ejemplo de gráfico](plot_example.png)
 
 ---
 
