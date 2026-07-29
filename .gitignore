@@ -1,0 +1,11 @@
+# Credenciales - nunca subir
+.Renviron
+
+# Archivos de R
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# Sistema
+.DS_Store
