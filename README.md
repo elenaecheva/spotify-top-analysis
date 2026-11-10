@@ -46,6 +46,26 @@ Este script en R se conecta a la Spotify Web API para obtener tus datos de escuc
 5. Reinicia la sesión de R (`Session → Restart R`) para que se cargue el `.Renviron`.
 6. Ejecuta `spotify_top_analysis.R`. Se abrirá el navegador para iniciar sesión en Spotify y autorizar la app.
 
+## Análisis SQL en BigQuery
+
+Las tablas generadas en R se exportaron a CSV y se cargaron en Google BigQuery para
+analizar y validar los datos con SQL:
+
+- Artistas con más canciones en el top, con su mejor puesto y su puesto medio
+- Reparto del ranking por tramos (CASE)
+- Canción mejor posicionada de cada artista (funciones de ventana: ROW_NUMBER)
+- Validación cruzada entre el top 50 de canciones y el resumen por álbumes
+  (FULL OUTER JOIN), señalando los registros que no cuadran
+
+Consultas: [`bigquery/queries.sql`](bigquery/queries.sql)
+
+### Conclusiones
+- Las 50 canciones del top proceden de 30 álbumes distintos.
+- *LUX* de ROSALÍA domina el ranking con 15 de las 50 canciones (30 %), seguido de
+  *Virgin* de Lorde con 4.
+- Validación cruzada: las 30 combinaciones álbum–artista coinciden entre el top 50
+  de canciones y el resumen por álbumes, y cubren las 50 canciones.
+
 ### Notas
 
 - Las credenciales nunca están hardcodeadas en el código; se cargan con `Sys.getenv()` desde un archivo `.Renviron` que está excluido del repositorio vía `.gitignore`.
@@ -88,6 +108,26 @@ This R script connects to the Spotify Web API to retrieve your personal listenin
    ```
 5. Restart your R session (`Session → Restart R`) so `.Renviron` gets loaded.
 6. Run `spotify_top_analysis.R`. A browser window will open for you to log in to Spotify and authorize the app.
+
+## SQL analysis in BigQuery
+
+The R output tables were exported to CSV and loaded into Google BigQuery to analyse
+and validate the data with SQL:
+
+- Top artists by number of tracks, best and average position
+- Distribution of the ranking by tiers (CASE)
+- Best-ranked track per artist (window functions: ROW_NUMBER)
+- Cross-table validation between the top 50 tracks and the album summary
+  (FULL OUTER JOIN), flagging records that don't match
+
+Queries: [`bigquery/queries.sql`](bigquery/queries.sql)
+
+### Key findings
+- The top 50 tracks come from 30 different albums.
+- ROSALÍA's *LUX* dominates the ranking with 15 of the 50 tracks (30%), followed by
+  Lorde's *Virgin* with 4.
+- Cross-table validation: all 30 album–artist combinations matched between the
+  top 50 track list and the album summary, accounting for all 50 tracks.
 
 ### Notes
 
